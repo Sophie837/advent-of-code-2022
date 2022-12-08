@@ -1,6 +1,5 @@
 const { readFileSync, promises: fsPromises } = require("fs");
 const rucksackItems = readFileSync("day-3/input.txt", "utf-8").split("\n");
-// console.log(rucksackItems);
 
 function prioritySumOfDuplicateItems() {
   const duplicateItems = rucksackItems.map((rucksack) => {
@@ -29,11 +28,9 @@ function prioritySumOfIdentificationBadges() {
   let identificationBadges = [];
   for (let i = 0; i < rucksackItems.length; i += 3) {
     let groupRucksacks = rucksackItems.slice(i, i + 3);
-    // console.log(groupRucksacks);
     const groupRucksackItems = groupRucksacks.map((rucksack) =>
       rucksack.split("")
     );
-    // console.log(groupRucksackItems);
     const duplicateItem = groupRucksackItems[0].filter(
       (element) =>
         groupRucksackItems[1].includes(element) &&
@@ -42,7 +39,6 @@ function prioritySumOfIdentificationBadges() {
     const identificationBadge = [...new Set(duplicateItem)];
     identificationBadges = [...identificationBadges, ...identificationBadge];
   }
-  //   console.log(identificationBadges);
 
   const priorityOfBadges = identificationBadges
     .map((char) =>
