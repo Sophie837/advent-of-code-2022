@@ -19,4 +19,25 @@ function sumOfFullyContainedAssignmentPairs() {
   console.log(fullyContainedAssignmentPairs);
 }
 
+function sumOfOverlappingAssignmentPairs() {
+  let overlappingAssignmentPairs = 0;
+  allAssignmentPairs.map((assignmentPair) => {
+    const pairBoundary = assignmentPair.match(/\d+/g);
+    if (
+      (Number(pairBoundary[2]) >= Number(pairBoundary[0]) &&
+        Number(pairBoundary[2]) <= Number(pairBoundary[1])) ||
+      (Number(pairBoundary[3]) >= Number(pairBoundary[0]) &&
+        Number(pairBoundary[2]) <= Number(pairBoundary[1])) ||
+      (Number(pairBoundary[0]) >= Number(pairBoundary[2]) &&
+        Number(pairBoundary[0]) <= Number(pairBoundary[3])) ||
+      (Number(pairBoundary[1]) >= Number(pairBoundary[2]) &&
+        Number(pairBoundary[1]) <= Number(pairBoundary[3]))
+    ) {
+      overlappingAssignmentPairs += 1;
+    }
+  });
+  console.log(overlappingAssignmentPairs);
+}
+
 sumOfFullyContainedAssignmentPairs();
+sumOfOverlappingAssignmentPairs();
