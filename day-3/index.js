@@ -27,7 +27,7 @@ function prioritySumOfDuplicateItems() {
 function prioritySumOfIdentificationBadges() {
   let identificationBadges = [];
   for (let i = 0; i < rucksackItems.length; i += 3) {
-    let groupRucksacks = rucksackItems.slice(i, i + 3);
+    const groupRucksacks = rucksackItems.slice(i, i + 3);
     const groupRucksackItems = groupRucksacks.map((rucksack) =>
       rucksack.split("")
     );
