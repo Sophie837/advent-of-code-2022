@@ -54,8 +54,8 @@ function getNumberOfHiddenTrees() {
 }
 
 function getNumberOfVisibleTrees() {
+  getNumberOfHiddenTrees();
   console.log("Visible: ", allTrees - hiddenTrees);
 }
 
-getNumberOfHiddenTrees();
 getNumberOfVisibleTrees();
