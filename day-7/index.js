@@ -17,18 +17,6 @@ function getFileSizePerDirectory(directory) {
   return fileSizes;
 }
 
-function getTotalDirectorySizeToDelete() {
-  let totalSize = 0;
-
-  for (const dir in dirSizes) {
-    if (dirSizes[dir] <= 100000) {
-      totalSize += dirSizes[dir];
-    }
-  }
-
-  console.log("Total size: ", totalSize);
-}
-
 function getAccumulativeFileSizes() {
   terminalOutputByCommand.map((command) => {
     if (command[0] === "..") {
@@ -50,5 +38,31 @@ function getAccumulativeFileSizes() {
   });
 }
 
+function getTotalDirectorySizeForSmallDirectories() {
+  let totalSize = 0;
+  for (const dir in dirSizes) {
+    if (dirSizes[dir] <= 100000) {
+      totalSize += dirSizes[dir];
+    }
+  }
+  console.log("Total size of small directories: ", totalSize);
+}
+
+function getDirectoryToDelete() {
+  const totalSpace = 70000000;
+  const requiredSpace = 30000000;
+  const usedSpace = dirSizes["outerDir"];
+  const unusedSpace = totalSpace - usedSpace;
+  const spaceToCreate = requiredSpace - unusedSpace;
+  let potentialDirsToDelete = [];
+  for (const dir in dirSizes) {
+    if (dirSizes[dir] >= spaceToCreate) {
+      potentialDirsToDelete = [...potentialDirsToDelete, dirSizes[dir]];
+    }
+  }
+  console.log("Directory to delete: ", Math.min(...potentialDirsToDelete));
+}
+
 getAccumulativeFileSizes();
-getTotalDirectorySizeToDelete();
+getTotalDirectorySizeForSmallDirectories();
+getDirectoryToDelete();
